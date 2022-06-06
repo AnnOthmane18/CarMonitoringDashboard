@@ -1,0 +1,22 @@
+
+.speed{
+    width: 20%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    padding:20px;
+}
+
+.Title{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding:10px 0px;
+}
+.Title h2{
+    font-size: 20px;
+}
+.CircularProgressbar{
+    font-size: 18px;
+}

@@ -1,0 +1,49 @@
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.home{
+        /* display:flex; */
+        margin-left: 50px;
+        /* background-color:lightblue; */
+        padding: 20px;
+}
+.homeContainer{
+    flex: 20;
+}
+
+.charts{
+    display: flex;
+    justify-content: space-around;
+    height: 300px;
+    width:100%;
+    padding:0px 50px;
+    margin:50px auto;
+    /* background-color:blue; */
+    /* margin: 150px auto; */
+    border: 1.5px solid lightskyblue;
+}
+
+.var{
+    width:80%;
+    margin: 0px auto;
+    display: flex;
+    justify-content:space-between;
+    /* background-color:lightblue; */
+    padding: 20px;
+}
+.fuel-consumption{
+    padding: 30px;
+    width:90%;
+    margin: 0px auto;
+    border-radius: 5px;
+    /* display: flex; */
+    /* flex: 1; */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+}
+.Chart2{
+    width:100%;
+    margin: 0px auto;
+}

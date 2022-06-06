@@ -1,0 +1,53 @@
+
+
+.Sidebar{
+    flex:4;
+    height: 100vh;
+    border-right: 0.5px solid lightgray;
+}
+.top{
+    height: 100px;
+ 
+    display: flex;
+    justify-content: center;
+    align-items : center;
+}
+
+hr{
+    width: 80%;
+    margin :0px auto;
+    height: 0px;
+    border: 0.3px solid lightgray;
+}
+
+.center{
+    background-color: aquamarine;
+    margin: 50px auto;
+}
+
+.center ul li{
+    list-style: none;
+    padding:5px;
+    cursor: pointer;
+    margin:10px;
+    display: flex;
+    align-items : center;
+    height: 100%;
+}
+.center ul li:hover{
+    background-color:rgb(203, 203, 243);
+}
+.center ul li span{
+    margin-left:10px;
+}
+
+
+.bottom {
+    display:flex;
+    justify-content:center;    
+}
+.icon:hover{
+    border: 0.5px solid lightgray;
+    background-color:lightgray;
+    border-radius: 5px;
+}

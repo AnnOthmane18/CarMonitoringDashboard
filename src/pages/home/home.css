@@ -43,7 +43,8 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
 }
-.Chart2{
-    width:100%;
-    margin: 0px auto;
+.variants{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 15px;
+    padding:15px;
 }

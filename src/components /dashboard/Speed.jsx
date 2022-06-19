@@ -1,19 +1,70 @@
-// import React from 'react'
-import './speed.css'
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
-import SpeedIcon from '@mui/icons-material/Speed';
+import React, { useState, useEffect } from "react";
+import { Chart } from "react-google-charts";
+import $ from "jquery";
 
-const Speed = ()=>{
-    return(
-        <div className="speed">
-            <div className="Title">
-                <h2>Speed Km/h</h2>
-                <SpeedIcon/>
-            </div>
-            <CircularProgressbar value={70} text={`${70}Km/h`} />
-        </div>
-    )
+
+let speed;
+export const options = {
+  width: 300,
+  height: 300,
+  redFrom: 450,
+  redTo: 500,
+  yellowFrom: 400,
+  yellowTo: 450,
+  minorTicks: 15,
+  majorTicks:["0","100","200","300","400","500"],
+  max:500,
+};
+
+let getCarData = function () {
+  $.ajax({
+      type: "GET",
+      url: "https://rpi1s3.s3.amazonaws.com/myKey", 
+      dataType: "json",
+      async: false,
+      success: function (data) {
+          speed = data.Speed;  
+          console.log('speed :', data.Speed);  
+      },
+      error: function (xhr, status, error) {
+          console.error("JSON error: " + status);
+      }
+  });
+}
+setInterval(() => {
+  getCarData();
+}, 500);
+
+
+export function getData() {
+  return [
+    ["Label", "Value"],
+    ["Speed", parseInt(speed)],
+    // ["Speed", 300],
+  ];
 }
 
-export default Speed
+const Speed = () => {
+  const [data, setData] = useState(getData);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setData(getData());
+    }, 3000);
+
+    return () => {
+      clearInterval(id);
+    };
+  });
+  return (
+    <Chart
+      chartType="Gauge"
+      width="400px"
+      height="400px"
+      data={data}
+      options={options}
+    />
+  );
+};
+
+export default Speed;

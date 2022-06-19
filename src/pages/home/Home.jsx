@@ -5,6 +5,7 @@ import Chart1 from '../../components /dashboard/Chart1'
 import Chart from '../../components /dashboard/Chart'
 import Chart2 from '../../components /dashboard/Chart2'
 import Speed from '../../components /dashboard/Speed'
+import GraphRender from '../../components /dashboard/GraphRender'
 import Fuel from '../../components /dashboard/Fuel'
 import Temp from '../../components /dashboard/Temp'
 import Chart3 from '../../components /Chart3'
@@ -32,9 +33,15 @@ const Home = ()=>{
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
                 <div className="var">
-                    <Speed/>
-                    <Fuel/>
-                    <Temp/>
+                    <div className="temp variants">
+                        <Temp/>
+                    </div>
+                    <div className="sped variants">
+                        <Speed/>
+                    </div>
+                    <div className="fuel variants">
+                        <Fuel/>
+                    </div>
                 </div>
                 <div className="fuel-consumption">
                     <Chart3 title="Fuel consumption" aspect = {4/1} />

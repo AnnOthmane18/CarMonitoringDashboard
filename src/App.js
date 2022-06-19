@@ -9,8 +9,6 @@ import {
 function App() {
   return (
     <div className="App">
-      <h1>test1</h1>
-      <h1>test12</h1>
     <BrowserRouter>
        <Routes>
          <Route path="/">

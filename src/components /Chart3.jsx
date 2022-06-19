@@ -1,50 +1,60 @@
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+import $ from 'jquery';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+// import fuel from './FuelValue'
 
-const data = [
-  { name: "January",  Total: 1200 },
-  { name: "February", Total: 2100 },
-  { name: "March",    Total: 800 },
-  { name: "April",    Total: 1600 },
-  { name: "May",      Total: 900 },
-  { name: "June",     Total: 1700 },
-];
+
+let fuel;
+let GetCarData = function () {
+  // const [,setState] = useState();
+    $.ajax({
+        type: "GET",
+        url: "https://rpi1s3.s3.amazonaws.com/myKey",  //example: https://mydatabucket.s3.amazonaws.com/myKey"
+        dataType: "json",
+        async: false,
+        success: function (data) {
+            fuel = data.Fuel;  
+            // setState({});
+
+            // console.log('Chart Fue                         l :',parseFloat(data.Fuel));  
+            // console.log("--------->>>",fuel);
+        },
+        error: function (xhr, status, error) {
+            console.error("JSON error: " + status);
+        }
+    });
+  }
+  // console.log(">>>>>>>>>>>>>>>",fuel);
+  setInterval(() => {
+    GetCarData();
+  }, 0);
+const options = {
+  title: {
+    text: 'Fuel Consumption '
+  },
+  yAxis: {
+    text: 'Fuel'
+  },
+  series: {
+    data: [0.1,0.2,0.5,0.6,0.8,0.9,0.5,2,0.20,0.8,1.6,1.6,3,2,1,3,2,4,3,1,2]
+  }
+}
+// options.series.data.push(parseFloat(fuel));
+// options.series.data.push(10);
+// options.series.data.push(15);
+options.series.data.push(3);
+// console.log(options.series.data)
+// options.series.data.push(150);
+// options.series.data.push(170);
+// options.series.data.push(180);
 
 const Chart3 = ({ aspect, title }) => {
   return (
     <div className="chart">
-      <div className="title">{title}</div>
-      <ResponsiveContainer width="100%" aspect={aspect}>
-        <AreaChart
-          width={730}
-          height={250}
-          data={data}
-          margin={{ top: 10, right: 0, left: 30, bottom: 10 }}
-        >
-          <defs>
-            <linearGradient id="total" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity = {0.8}/>
-              <stop offset="95%" stopColor="#8884d8" stopOpacity= {0}/>
-            </linearGradient>
-          </defs>
-          <XAxis dataKey="name" stroke="gray" />
-          <CartesianGrid strokeDasharray="3 3" className="chartGrid" />
-          <Tooltip />
-          <Area
-            type="monotone"
-            dataKey="Total"
-            stroke="#8884d8"
-            fillOpacity={1}
-            fill="url(#total)"
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+      <HighchartsReact
+    highcharts={Highcharts}
+    options={options}
+  />
     </div>
   );
 };

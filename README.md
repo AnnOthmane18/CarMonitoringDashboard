@@ -5,7 +5,7 @@ This project is about a WEB Dashboard that tracks the car state via AWS cloud in
 
 **Hardware:**
 * [Raspberry Pi 4](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)
-* [2-Channel CAN Module](https://www.waveshare.com/2-ch-can-hat.htm)
+* [2-Channel CAN Module](https://www.waveshare.com/wiki/2-CH_CAN_HAT)
 **Software:**
 * [React.js](https://reactjs.org/)
 * [Python](https://python.org)
@@ -200,3 +200,10 @@ setInterval(() => {
   getCarData();
 }, 500);
 ```
+#DEMO
+* **[DEMO]**(drive.google.com/file/d/1Bw-Iow_60oOvuyN4Af1XG2DfG6Oh6GIR/view?usp=sharing)
+#Acknowledgements
+* [Steve on IoT](https://www.youtube.com/channel/UCiwFO9083gofF-OJMZsYIdg)
+* [CAN-UTILS](armadeus.org/wiki/index.php?title=CAN_bus_Linux_driver)
+* [CAN Module for Raspberry PI](Waveshare.com/wiki/2-CH_CAN_HAT)
+

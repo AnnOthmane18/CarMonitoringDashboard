@@ -83,7 +83,7 @@ Preparing the Cloud Environment.
   ![alt text](https://github.com/AnnOthmane18/CarMonitoringDashboard/blob/master/resources/certificates.png)
 
   4. Creating a **Role**(Action) for our IoT thing, which will store the received data into an S3 Bucket in a JSON Format
-  ![alt text](https://github.com/AnnOthmane18/CarMonitoringDashboard/blob/master/resources/role.png)
+  ![alt text](https://github.com/AnnOthmane18/CarMonitoringDashboard/blob/master/resources/rule.png)
   5. Testing our connection with the AWS Cloud(Subcribing to our Topic **"RPI"**, that we will use it in our python script)
   ![alt text](https://github.com/AnnOthmane18/CarMonitoringDashboard/blob/master/resources/MQTT_TEST.png)
 
@@ -164,7 +164,7 @@ while True:
 if line.split()[1] == "2AA":  # here we filter can frames by 2AA, to extract SPEED-FUEL-TEMPERATURE data
                 x = line.split()
 ```
-* **Converting the extracted data(Speed - Temp - Fuel), using the mapping function:**
+* **Converting the extracted data(Speed - Temp - Fuel), using the <a href="#Mapping-Function:">mapping function</a>:**
 ```sh
 speed = translate(speed_dec, 0, 28911, 0, max_speed) # max_speed change, progressively with the gear position 
 temp = translate(temp_dec, 0, 28911, 0, 120) # 0 > 120 real interval

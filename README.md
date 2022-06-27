@@ -94,7 +94,8 @@ Preparing the Cloud Environment.
   ![alt text](https://github.com/AnnOthmane18/CarMonitoringDashboard/blob/master/resources/block_access.png)
   
 ## Code
-### Python Script
+### Python Script:
+**The script is executed in the Raspberry PI.**
 * **Libraries Used:**
 ```sh
 import os #for executing linux commands inside python script 
@@ -108,7 +109,7 @@ MQTTClient = AWSIoTMQTTClient("RPI") #Topic = 'RPI'
 ```sh
 MQTTClient.configureEndpoint("a1drqz04inqt2x-ats.iot.us-east-1.amazonaws.com", 8883) #8883: default port for MQTT Protocol
 ```
-* **configuring authentication credentials, to connect to aws cloud:**
+* **Configuring authentication credentials, to connect to aws cloud:**
 ```sh
 MQTTClient.configureCredentials("/home/pi/AWS_RPI/RCA.pem","/home/pi/AWS_RPI/private.key","/home/pi/AWS_RPI/DevCert.crt") # Root Cert,Private key, Device Cert
 ```
@@ -144,7 +145,7 @@ while True:
  with open('frames.txt') as infile:
         for line in infile:
 ```
-* **filtering CAN frames by 1AA, to extract Gear position data(1AA is linked with gear position in the dashboard simulator)**
+* **Filtering CAN frames by 1AA, to extract Gear position data(1AA is linked with gear position in the dashboard simulator)**
 ```sh
           # can0       1AA   [2]  81 01
 	        if line.split()[1] == "1AA": 
@@ -173,4 +174,29 @@ fuel = translate(fuel_dec, 0, 28911, 0, 1) # 0 > 1 real interval
 * **Publishing data to AWS in JSON Format:**
 ```sh
 MQTTClient.publish(topic="RPI",QoS=1,payload='{"Speed":"'+str(speed)+'", "Temperature":"'+str(temp)+'","Fuel":"'+str(fuel)+'"}')
+```
+###Fetching data to display it in the WEB Dashboard:
+* **Using a Ajax Call Back function:**
+Accessing the JSON Data, from the objecr file URL(that could be found inside the S3 Bucket that we created before)
+```sh
+let getCarData = function () {
+  $.ajax({
+      type: "GET",
+      url: "https://rpi1s3.s3.amazonaws.com/myKey", 
+      dataType: "json",
+      async: false,
+      success: function (data) {
+          speed = data.Speed;  
+      },
+      error: function (xhr, status, error) {
+          console.error("JSON error: " + status);
+      }
+  });
+}
+```
+Fetching every 0.5s, to decrease the latency.
+```sh
+setInterval(() => {
+  getCarData();
+}, 500);
 ```

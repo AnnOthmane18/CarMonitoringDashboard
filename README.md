@@ -104,6 +104,8 @@ Preparing the Cloud Environment.
   2. Making our bucket public
   ![alt text](https://github.com/AnnOthmane18/CarMonitoringDashboard/blob/master/resources/block_access.png)
   
+  <p align="right">(<a href="#top">back to top</a>)</p>
+
 ## Code
 ### Python Script:
 **The script is executed in the Raspberry PI.**
@@ -211,6 +213,8 @@ setInterval(() => {
   getCarData();
 }, 500);
 ```
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 # DEMO
 * [DEMO](https://www.drive.google.com/file/d/1Bw-Iow_60oOvuyN4Af1XG2DfG6Oh6GIR/view?usp=sharing)
 # Acknowledgements
@@ -218,3 +222,4 @@ setInterval(() => {
 * [CAN-UTILS](https://www.armadeus.org/wiki/index.php?title=CAN_bus_Linux_driver)
 * [CAN Module for Raspberry PI](https://www.Waveshare.com/wiki/2-CH_CAN_HAT)
 
+<p align="right">(<a href="#top">back to top</a>)</p>

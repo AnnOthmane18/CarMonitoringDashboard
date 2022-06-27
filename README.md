@@ -1,35 +1,72 @@
-# Getting Started with Create React App
+## Project overview
+This project is about a WEB Dashboard that tracks the car state via AWS cloud infratructure
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Built With
 
-## Available Scripts
+**Hardware:**
+* [Raspberry Pi 4](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)
+* [2-Channel CAN Module](https://www.waveshare.com/2-ch-can-hat.htm)
+**Software:**
+* [React.js](https://reactjs.org/)
+* [Python](https://python.org)
+* [mui](https://mui.com)
 
-In the project directory, you can run:
+## Project Global Architecture
+![alt text](https://github.com/AnnOthmane18/CarMonitoringDashboard/blob/master/resources/architecture.png)
 
-### `npm start`
+### Project HARD Architecture
+![alt text](https://github.com/AnnOthmane18/CarMonitoringDashboard/blob/master/resources/architecture1.png)
+In this part, we connect our car dashboard simulator with the raspberry Pi 4, which is already linked with the CAN shield, through 2 wires CAN High & CAN Low, to extract can frames from the simulator.
+In order to extract CAN Frames we used **CAN-Utils**.
+**CAN Utils:** It's a Linux specific set of utilities that enables Linux to communicate with the CAN network on the vehicle, such that we can sniff, spoof and create our own CAN packets to pwn the vehicle! 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### CAN Utils Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+First of all, we are going to set up our environment(installing Raspbian in the Raspberry Pi) 
 
-### `npm test`
+1. Installing the  can-utils
+  ```sh
+   apt-get install can-utils
+   ``` 
+2. Loading all the required drivers
+   ```sh
+   modprobe can
+   modprobe can-dev
+   modprobe can-raw
+   ```
+3. Add the following lines to your Config.txt file, to enable SPI, as well as CAN0 & CAN1 interfaces
+   ```sh
+   sudo nano /boot/config.txt
+   ```
+   ```sh
+   dtparam=spi=on
+   dtoverlay=mcp2515-can1,oscillator=16000000,interrupt=25
+   dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=23
+   ```
+   ```sh
+   sudo reboot
+   ```
+4. Set up CAN in raspbian(choose your appropriate bit rate, 250k B/s in my case)
+   ```sh
+   Sudo ifconfig can0 down
+   sudo ip link set can0 up type can bitrate 250000
+   ```
+to Extract CAN Frames, type the following cmds:
+* First, check that your can interface is running/UP(can0/can1)
+  ```sh
+  candump can0/can1
+  ```
+* To store CAN Frames in a log file 
+  ```sh
+  candump -l can0/can1
+  ```
+* To store CAN Frames in a .txt file 
+  ```sh
+  candump -l can0/can1
+  ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
 

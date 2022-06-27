@@ -3,10 +3,10 @@ This project is about a WEB Dashboard that tracks the car state via AWS cloud in
 
 ## Built With
 
-* **Hardware:**
+**Hardware:**
 * [Raspberry Pi 4](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)
 * [2-Channel CAN Module](https://www.waveshare.com/wiki/2-CH_CAN_HAT)
-* **Software:**
+**Software:** <br />
 * [React.js](https://reactjs.org/)
 * [Python](https://python.org)
 * [mui](https://mui.com)
@@ -16,16 +16,16 @@ This project is about a WEB Dashboard that tracks the car state via AWS cloud in
 
 ## Project HARD Architecture
 ![alt text](https://github.com/AnnOthmane18/CarMonitoringDashboard/blob/master/resources/architecture1.png)
-In this part, we connect our car dashboard simulator with the raspberry Pi 4, which is already linked with the CAN shield, through 2 wires CAN High & CAN Low, to extract can frames from the simulator.
-In order to extract CAN Frames we used **CAN-Utils**.
+In this part, we connect our car dashboard simulator with the raspberry Pi 4, which is already linked with the CAN shield, through 2 wires CAN High & CAN Low, to extract can frames from the simulator.<br />
+In order to extract CAN Frames we used **CAN-Utils**.<br />
 **CAN Utils:** It's a Linux specific set of utilities that enables Linux to communicate with the CAN network on the vehicle, such that we can sniff, spoof and create our own CAN packets to pwn the vehicle! 
-
+<br />
 ## CAN Utils Installation
 
-First of all, we are going to set up our environment(installing Raspbian in the Raspberry Pi) 
+First of all, we are going to set up our environment(Raspbian should be already installed in the Raspberry Pi) 
 
 1. Installing the  can-utils
-  ```sh
+   ```sh
    apt-get install can-utils
    ``` 
 2. Loading all the required drivers
@@ -35,14 +35,17 @@ First of all, we are going to set up our environment(installing Raspbian in the 
    modprobe can-raw
    ```
 3. Add the following lines to your Config.txt file, to enable SPI, as well as CAN0 & CAN1 interfaces
+   open configuration file using nano
    ```sh
    sudo nano /boot/config.txt
    ```
+   add the following lines to the end of the file
    ```sh
    dtparam=spi=on
    dtoverlay=mcp2515-can1,oscillator=16000000,interrupt=25
    dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=23
    ```
+   reboot your raspberry
    ```sh
    sudo reboot
    ```
@@ -54,15 +57,23 @@ First of all, we are going to set up our environment(installing Raspbian in the 
 To Extract CAN Frames, type the following cmds:
 * First, check that your can interface is running/UP(can0/can1)
   ```sh
-  candump can0/can1
+  ifconfig can0
+  ```
+  ELSE
+  ```sh
+  sudo ifconfig can0 up
+  ```
+* Extracting CAN frames
+  ```sh
+  sudo candump can0	
   ```
 * To store CAN Frames in a log file 
   ```sh
-  candump -l can0/can1
+  sudo candump -l can0/can1
   ```
 * To store CAN Frames in a .txt file 
   ```sh
-  candump can0/can1 > fileName.txt
+  sudo candump can0/can1 > fileName.txt
   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>

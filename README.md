@@ -3,10 +3,10 @@ This project is about a WEB Dashboard that tracks the car state via AWS cloud in
 
 ## Built With
 
-**Hardware:**
+* **Hardware:**
 * [Raspberry Pi 4](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)
 * [2-Channel CAN Module](https://www.waveshare.com/wiki/2-CH_CAN_HAT)
-**Software:** <br />
+* **Software:** <br />
 * [React.js](https://reactjs.org/)
 * [Python](https://python.org)
 * [mui](https://mui.com)

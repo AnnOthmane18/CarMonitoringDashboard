@@ -200,9 +200,9 @@ setInterval(() => {
   getCarData();
 }, 500);
 ```
-#DEMO
+# DEMO
 * [DEMO](drive.google.com/file/d/1Bw-Iow_60oOvuyN4Af1XG2DfG6Oh6GIR/view?usp=sharing)
-#Acknowledgements
+# Acknowledgements
 * [Steve on IoT](https://www.youtube.com/channel/UCiwFO9083gofF-OJMZsYIdg)
 * [CAN-UTILS](armadeus.org/wiki/index.php?title=CAN_bus_Linux_driver)
 * [CAN Module for Raspberry PI](Waveshare.com/wiki/2-CH_CAN_HAT)

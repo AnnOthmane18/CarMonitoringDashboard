@@ -1,5 +1,5 @@
 # Project overview
-This project is about a WEB Dashboard that tracks the car state via AWS cloud infratructure
+This project is about a WEB Dashboard that tracks the car state via AWS cloud infrastructure
 
 ## Built With
 

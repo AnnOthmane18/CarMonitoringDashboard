@@ -170,3 +170,7 @@ speed = translate(speed_dec, 0, 28911, 0, max_speed) # max_speed change, progres
 temp = translate(temp_dec, 0, 28911, 0, 120) # 0 > 120 real interval
 fuel = translate(fuel_dec, 0, 28911, 0, 1) # 0 > 1 real interval
 ```
+* **Publishing data to AWS in JSON Format:**
+```sh
+MQTTClient.publish(topic="RPI",QoS=1,payload='{"Speed":"'+str(speed)+'", "Temperature":"'+str(temp)+'","Fuel":"'+str(fuel)+'"}')
+```
